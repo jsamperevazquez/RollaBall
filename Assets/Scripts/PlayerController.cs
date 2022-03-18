@@ -1,21 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using  UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 0;
+    public TextMeshProUGUI countText;
+    public GameObject winTextObject;
+    
     private Rigidbody _rb;
-
+    private int count;
     private float _movementX;
-
     private float _movementY;
     // Start is called before the first frame update
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        count = 0;
+        SetCountText();
+        
+        winTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -36,7 +43,19 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickUp"))
         {
-            other.gameObject.SetActive(false); 
+            other.gameObject.SetActive(false);
+            count++;
+            SetCountText();
+        }
+    }
+
+    void SetCountText()
+    {
+        countText.text = "Count: " + count.ToString();
+
+        if (count >= 12)
+        {
+            winTextObject.SetActive(true);
         }
     }
 }
