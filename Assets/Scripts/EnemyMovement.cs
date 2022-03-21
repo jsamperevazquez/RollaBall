@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
        estarAlerta = Physics.CheckSphere(transform.position,rangoVision,capaPlayer);
        if (estarAlerta)
        {
-           Debug.Log("Jugador entró en radio de enemigo");
+           //Debug.Log("Jugador entró en radio de enemigo");
            transform.LookAt(player);
            transform.position = Vector3.MoveTowards(transform.position, player.position, velocidadEnemigo * Time.deltaTime);
        }
